@@ -26,7 +26,7 @@
 <body>
   <header>
     <div class="wrap">
-      <div class="top"><div class="brand"><i></i>REEBOK MÉXICO</div><div class="stamp">Corte de información: 27 julio 2026</div></div>
+      <div class="top"><div class="brand"><i></i>REEBOK MÉXICO</div><div class="stamp">Corte: 27 julio 2026 · Auditoría de cálculo: 29 julio 2026</div></div>
       <div class="hero">
         <div><div class="eyebrow">Tablero nacional de decisión comercial</div><h1>Viabilidad de nuevas tiendas físicas</h1><p>Consulta una plaza y revisa elegibilidad por ancla, potencial comercial, competencia, mercado, riesgos, datos faltantes y fuentes. El cine es sólo contexto.</p></div>
         <div class="verdict"><strong>La decisión empieza por plaza</strong><span>El puntaje es un índice de prefactibilidad explicable; no sustituye renta, venta esperada ni disponibilidad del local.</span></div>
@@ -118,7 +118,8 @@
 
     <section id="metodo" class="section">
       <div class="section-head"><div><div class="kicker">Gobernanza de decisión</div><h2>Método y límites</h2></div><p>Se sustituyó el puntaje arbitrario del archivo anterior por una matriz explícita de señales comerciales y riesgos.</p></div>
-      <div class="grid twocol"><div class="card"><h3 style="margin-top:0">Ponderación de screening</h3><div class="weights"><span class="w1" style="width:25%">25</span><span class="w2" style="width:25%">25</span><span class="w4" style="width:25%">25</span><span class="w5" style="width:25%">25</span></div><p class="small">Escala y demanda 25% · calidad/productividad de plaza 25% · afinidad deportiva y espacio blanco 25% · ejecución, costo y canibalización 25%. <b>El cine pesa 0%.</b></p></div><div class="card"><h3 style="margin-top:0">Variables faltantes para aprobación</h3><ul><li>Renta total y contribución de mantenimiento por m².</li><li>Afluencia mensual, conversión por acceso y permanencia.</li><li>Ventas comparables de deporte/calzado por m².</li><li>Vacancia, ubicación exacta, frente y visibilidad del local.</li><li>Radio real de clientes y canibalización omnicanal.</li></ul></div></div>
+      <div class="grid twocol"><div class="card"><h3 style="margin-top:0">Shortlist con investigación comercial</h3><div class="weights"><span class="w1" style="width:25%">25</span><span class="w2" style="width:25%">25</span><span class="w4" style="width:25%">25</span><span class="w5" style="width:25%">25</span></div><p class="small">Escala y demanda 25% · calidad/productividad de plaza 25% · afinidad deportiva y espacio blanco 25% · ejecución, costo y canibalización 25%. <b>El cine pesa 0%.</b></p></div><div class="card"><h3 style="margin-top:0">Screening para los 238 registros básicos</h3><ul><li><b>25 puntos:</b> tener Liverpool, Sears o Palacio.</li><li><b>10, 18 o 25 puntos:</b> una, dos o tres cadenas ancla a ≤1 km.</li><li><b>5 puntos por sucursal:</b> densidad de anclas a ≤3 km, con tope de 25.</li><li><b>0 a 25 puntos:</b> distancia a la tienda Reebok confirmada más cercana.</li></ul><p class="small">Lectura: 80–100 prioridad para completar caso · 65–79 validar mercado y renta · 0–64 observación. Es un screening de evidencia observable, no una probabilidad de éxito ni una autorización de apertura.</p></div></div>
+      <div class="callout" style="margin-top:16px"><h3>Conciliación de la base</h3><p>Auditoría del 29 julio 2026: 238 registros elegibles en 32 entidades (125 Liverpool, 92 Sears y 21 Palacio), sin nombres vacíos, coordenadas inválidas, claves exactamente duplicadas ni diferencias entre la suma de factores y el puntaje mostrado.</p></div>
       <div class="callout" style="margin-top:16px"><h3>Alcance de la capa competitiva</h3><p>La base de Liverpool, Sears y Palacio es nacional y define la elegibilidad. La verificación de Nike, adidas, PUMA y cine se concentró en las 12 plazas del shortlist; estos datos ordenan prioridades, pero su ausencia no elimina una plaza. Los directorios públicos cambian y “no encontrado” no prueba cierre.</p></div>
     </section>
 
@@ -126,6 +127,7 @@
       <div class="section-head"><div><div class="kicker">Trazabilidad</div><h2>Fuentes principales</h2></div><p>Se priorizaron localizadores y documentos corporativos oficiales; fuentes secundarias sólo se usan cuando el directorio de plaza no publica el dato.</p></div>
       <div class="card"><ul class="sources">
         <li><a href="https://www.liverpool.com.mx/tienda/browse/storelocator" target="_blank">Liverpool — localizador oficial</a></li>
+        <li><a href="https://laperla.com.mx/directorio/liverpool/" target="_blank">La Perla — Liverpool dentro del centro comercial</a></li>
         <li><a href="https://www.elpuertodeliverpool.mx/docs/informes-anuales/Liverpool-informe-anual-2025.pdf" target="_blank">El Puerto de Liverpool — Informe anual 2025</a></li>
         <li><a href="https://www.sears.com.mx/localizador-tiendas/" target="_blank">Sears México — localizador oficial</a></li>
         <li><a href="https://www.elpalaciodehierro.com/sucursales.html" target="_blank">El Palacio de Hierro — sucursales oficiales</a></li>
@@ -259,8 +261,7 @@
     const factorTotal=factors=>factors.reduce((sum,x)=>sum+(typeof x==='number'?x:x.v),0);
     const factorMarkup=factors=>factors.map((x,i)=>{const value=typeof x==='number'?x:x.v,max=typeof x==='number'?25:x.max,n=typeof x==='number'?factorNames[i]:x.n,note=typeof x==='number'?'':x.note;return `<div class="factor-row"><span${note?` title="${safe(note)}"`:''}>${n}</span><div class="factor-track"><div class="factor-fill" style="width:${value/max*100}%"></div></div><b>${value}/${max}</b></div>`;}).join('');
 
-    function scoreMarkup(score,note){return `<div class="score-panel"><div><div class="score-ring" style="--score:${score}"><strong>${score}<small>/100</small></strong></div><b>Índice de prefactibilidad</b></div><div class="score-caption">${note}</div></div>`;}
-    function pendingScoreMarkup(note){return `<div class="score-panel"><div><div class="score-ring" style="--score:0"><strong>N/D</strong></div><b>Sin puntaje confiable</b></div><div class="score-caption">${note}</div></div>`;}
+    function scoreMarkup(score,note,label='Índice de prefactibilidad'){return `<div class="score-panel"><div><div class="score-ring" style="--score:${score}"><strong>${score}<small>/100</small></strong></div><b>${label}</b></div><div class="score-caption">${note}</div></div>`;}
     function attachBusinessCase(){
       const area=document.getElementById('caseArea'),rent=document.getElementById('caseRent'),sales=document.getElementById('caseSales'),out=document.getElementById('caseResult');
       if(!area||!rent||!sales||!out)return;
@@ -297,13 +298,46 @@
         <div class="dashboard-grid"><div class="dash-card"><h4>Cómo se forma el ${x.score}/100</h4>${factors}<p class="data-note"><b>${x.factors.join(' + ')} = ${x.score}.</b> Ningún porcentaje se captura por separado.</p></div><div class="dash-card"><h4>Cine y competencia localizada</h4><p>${safe(x.comp)}</p>${comp?`<p class="data-note">Lectura: ${safe(comp.read)} · <a class="source-link" href="${comp.src}" target="_blank">fuente pública</a></p>`:''}</div><div class="dash-card missing"><h4>Qué falta para tomar la decisión</h4><ul><li>GLA, afluencia mensual, ocupación y perfil del visitante con periodo verificable.</li><li>Renta total, local disponible, frente, nivel y vecinos inmediatos.</li><li>Ventas comparables de deporte/calzado y canibalización Reebok.</li></ul></div><div class="dash-card"><h4>Nivel de lectura</h4><p>Este perfil permite comparar la plaza dentro del shortlist, pero no autoriza una apertura. Para una ficha meticulosa como Andamar hay que completar la auditoría de fuentes y el caso financiero.</p></div></div>`;
     }
 
-    function renderAnchorProfile(x){
-      const near1=anchorStores.filter(y=>y!==x&&kmBetween(x,y)<=1).sort((a,b)=>kmBetween(x,a)-kmBetween(x,b));
-      const near3=anchorStores.filter(y=>y!==x&&kmBetween(x,y)<=3).sort((a,b)=>kmBetween(x,a)-kmBetween(x,b));
+    const ANCHOR_SOURCE_URLS={
+      Liverpool:'https://www.liverpool.com.mx/tienda/browse/storelocator',
+      Sears:'https://www.sears.com.mx/localizador-tiendas/',
+      Palacio:'https://www.elpalaciodehierro.com/sucursales.html'
+    };
+    const BASIC_PROFILE_EVIDENCE={
+      'liverpool|la perla':[{n:'La Perla · Liverpool dentro del centro comercial',u:'https://laperla.com.mx/directorio/liverpool/'}]
+    };
+    const screeningDecision=score=>score>=80?{label:'Prioridad para completar caso',cls:'go'}:score>=65?{label:'Elegible · validar mercado y renta',cls:'watch'}:{label:'Elegible · mantener en observación',cls:'hold'};
+    function buildAnchorScreening(x){
+      const within1=anchorStores.filter(y=>kmBetween(x,y)<=1).sort((a,b)=>kmBetween(x,a)-kmBetween(x,b));
+      const within3=anchorStores.filter(y=>kmBetween(x,y)<=3).sort((a,b)=>kmBetween(x,a)-kmBetween(x,b));
+      const diversity=new Set(within1.map(y=>y.chain)).size;
       const nearestReebok=[...REEBOK_DATA].sort((a,b)=>kmBetween(x,a)-kmBetween(x,b))[0];
-      const diversity=new Set([x,...near1].map(y=>y.chain)).size;
-      const rows=[x,...near1].map(y=>`<tr><td>${safe(y.chain)}</td><td>${safe(y.n)}</td><td>${y===x?'Punto consultado':kmBetween(x,y).toFixed(2)+' km'}</td></tr>`).join('');
-      document.getElementById('analysisResult').innerHTML=`<div class="analysis-head">${pendingScoreMarkup('Hay anclas geolocalizadas, pero faltan variables comerciales para calcular un porcentaje defendible.')}<div class="result-title"><div class="kicker">${safe(x.s)} · ${safe(x.chain)}</div><h3>${safe(x.n)}</h3><p>La base nacional encontró esta sucursal y la hace elegible por ancla, pero no demuestra que el nombre corresponda a una plaza única ni contiene todavía competencia, afluencia o renta.</p><div class="meta-row"><span class="status-chip">ELEGIBLE POR ANCLA</span><span class="status-chip warn">PERFIL BÁSICO · NO DECIDIR</span><span class="status-chip dark">${diversity} cadenas ancla a ≤1 km</span><span class="status-chip dark">Reebok más cercano: ${kmBetween(x,nearestReebok).toFixed(0)} km</span></div></div></div><div class="dashboard-grid"><div class="dash-card wide"><h4>Anclas dentro de 1 km</h4><table class="evidence-table"><thead><tr><th>Cadena</th><th>Sucursal reportada</th><th>Distancia</th></tr></thead><tbody>${rows}</tbody></table></div><div class="dash-card missing"><h4>Información faltante</h4><ul><li>Confirmar nombre y polígono de la plaza.</li><li>Auditar Nike, adidas, PUMA y Reebok; registrar el cine sólo como contexto opcional.</li><li>Obtener población de influencia, tráfico, ocupación, renta y ventas comparables.</li></ul></div><div class="dash-card"><h4>Lectura automática</h4><p>${near3.length} anclas adicionales a ≤3 km. Se retiró el porcentaje automático porque no incluía demanda, productividad ni economía del local.</p></div></div>`;
+      const reebokKm=kmBetween(x,nearestReebok);
+      const diversityPoints=diversity>=3?25:diversity===2?18:10;
+      const densityPoints=Math.min(within3.length*5,25);
+      const whiteSpacePoints=reebokKm>50?25:reebokKm>25?20:reebokKm>10?15:reebokKm>3?10:0;
+      const factors=[
+        {n:'Elegibilidad por ancla',v:25,max:25,note:`Sucursal ${x.chain} presente en la base nacional.`},
+        {n:'Diversidad de anclas ≤1 km',v:diversityPoints,max:25,note:`${diversity} cadena${diversity===1?'':'s'} distinta${diversity===1?'':'s'} dentro del radio.`},
+        {n:'Densidad de anclas ≤3 km',v:densityPoints,max:25,note:`${within3.length} sucursal${within3.length===1?'':'es'} × 5 puntos, con tope de 25.`},
+        {n:'Espacio blanco Reebok',v:whiteSpacePoints,max:25,note:`Tienda confirmada más cercana: ${nearestReebok.n}, a ${reebokKm.toFixed(1)} km.`}
+      ];
+      const score=factorTotal(factors);
+      return {within1,within3,diversity,nearestReebok,reebokKm,factors,score,decision:screeningDecision(score)};
+    }
+    function renderAnchorProfile(x,p=buildAnchorScreening(x)){
+      const rows=p.within1.map(y=>`<tr><td>${safe(y.chain)}</td><td>${safe(y.n)}</td><td>${y===x?'Punto consultado':kmBetween(x,y).toFixed(2)+' km'}</td></tr>`).join('');
+      const evidence=[{n:`${x.chain} · localizador oficial`,u:ANCHOR_SOURCE_URLS[x.chain]},...(BASIC_PROFILE_EVIDENCE[`${norm(x.chain)}|${norm(x.n)}`]||[])];
+      document.getElementById('analysisResult').innerHTML=`
+        <div class="analysis-head">${scoreMarkup(p.score,'Suma exacta de cuatro señales observables. No usa renta, afluencia ni ventas no disponibles.','Screening preliminar')}<div class="result-title"><div class="kicker">${safe(x.s)} · ${safe(x.chain)}</div><h3>${safe(x.n)}</h3><p>La sucursal ${safe(x.chain)} confirma la elegibilidad por ancla. El puntaje permite priorizar la investigación; todavía no autoriza una apertura.</p><div class="meta-row"><span class="status-chip">ELEGIBLE POR ${safe(x.chain).toUpperCase()}</span><span class="status-chip ${p.decision.cls}">${p.decision.label}</span><span class="status-chip dark">${p.diversity} cadenas ancla a ≤1 km</span><span class="status-chip dark">Reebok más cercano: ${p.reebokKm.toFixed(1)} km</span></div></div></div>
+        <div class="metric-grid"><div class="metric"><b>${p.within1.length}</b><span>sucursales ancla ≤1 km</span></div><div class="metric"><b>${p.within3.length}</b><span>sucursales ancla ≤3 km</span></div><div class="metric"><b>${p.diversity}</b><span>cadenas distintas ≤1 km</span></div><div class="metric"><b>${p.reebokKm.toFixed(1)} km</b><span>Reebok confirmado más cercano</span></div></div>
+        <div class="dashboard-grid">
+          <div class="dash-card"><h4>Cómo se forma el ${p.score}/100</h4>${factorMarkup(p.factors)}<p class="data-note"><b>${p.factors.map(f=>f.v).join(' + ')} = ${p.score}.</b> Los cuatro valores visibles son el cálculo completo; no existe un porcentaje oculto.</p></div>
+          <div class="dash-card"><h4>Lectura para decisión</h4><p><b>${p.decision.label}.</b> La presencia de ${safe(x.chain)} sí cuenta y aporta elegibilidad. El resultado compara evidencia geolocalizada disponible; no estima probabilidad de éxito.</p></div>
+          <div class="dash-card wide"><h4>Anclas dentro de 1 km</h4><div class="table-scroll"><table class="evidence-table"><thead><tr><th>Cadena</th><th>Sucursal reportada</th><th>Distancia</th></tr></thead><tbody>${rows}</tbody></table></div><p class="data-note">Las distancias se calculan en línea recta. Una sucursal cercana puede pertenecer a otro inmueble; debe confirmarse el polígono antes del caso comercial.</p></div>
+          <div class="dash-card missing"><h4>Datos obligatorios antes de aprobar</h4><ul><li>Confirmar nombre, polígono y local disponible dentro de la plaza.</li><li>Obtener afluencia, población de influencia, ocupación, renta total y ventas comparables.</li><li>Auditar competencia deportiva y calcular canibalización con datos internos Reebok.</li></ul></div>
+          <div class="dash-card"><h4>Fuentes de elegibilidad</h4><ul class="source-list">${evidence.map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${s.n} ↗</a></li>`).join('')}</ul><p class="data-note">Corte de fuentes: 27 julio 2026 · auditoría de cálculo: 29 julio 2026.</p></div>
+        </div>`;
       if(map)map.setView([x.lat,x.lon],13);
     }
 
@@ -315,7 +349,7 @@
       const ranked=RANK_DATA.find(x=>x.aliases.some(a=>q.includes(norm(a))||norm(a).includes(q)));
       if(ranked){renderRankProfile(ranked);setGlobalScope({label:ranked.p,rank:ranked,aliases:ranked.anchorAliases,exact:true});return;}
       const anchor=anchorStores.find(x=>norm(x.n)===q)||anchorStores.find(x=>norm(x.n).includes(q)||q.includes(norm(x.n)));
-      if(anchor){renderAnchorProfile(anchor);setGlobalScope({label:anchor.n,point:anchor,radiusKm:1,exact:false});return;}
+      if(anchor){const screening=buildAnchorScreening(anchor);renderAnchorProfile(anchor,screening);setGlobalScope({label:anchor.n,point:anchor,radiusKm:1,exact:false,screening,anchor});return;}
       err.innerHTML=`No se encontró “${safe(raw)}” en la base. Prueba con el nombre de la plaza, una sucursal o una entidad.`;err.style.display='block';
     }
 
@@ -332,6 +366,10 @@
     const statusIcon=v=>v==='y'?'<span class="yes">✓ Sí</span>':v==='v'?'<span class="verify">△ Validar</span>':'<span class="no">— No localizado</span>';
     function renderCompTable(data){document.getElementById('compBody').innerHTML=data.length?data.map(x=>`<tr><td><b>${x.p}</b></td><td>${statusIcon(x.c)}</td><td>${statusIcon(x.n)}</td><td>${statusIcon(x.a)}</td><td>${statusIcon(x.u)}</td><td style="text-align:left">${x.read}</td><td><a class="source-link" href="${x.src}" target="_blank">abrir fuente</a></td></tr>`).join(''):'<tr><td colspan="7" class="empty-state">Esta plaza todavía no tiene auditoría competitiva completa.</td></tr>';}
     function renderRankTable(data){document.getElementById('rankBody').innerHTML=data.length?data.map(x=>`<tr><td><span class="rank">${String(RANK_DATA.indexOf(x)+1).padStart(2,'0')}</span></td><td><b>${x.p}</b></td><td>${x.anchors}</td><td>${x.comp}</td><td><span class="score">${x.score}</span><span class="small">/100</span><br><span class="small">${x.factors.join(' + ')}</span></td><td><span class="decision ${x.d}">${x.lab}</span></td><td>${x.why}</td></tr>`).join(''):'<tr><td colspan="7" class="empty-state">Sin puntaje: faltan datos suficientes para integrar los cuatro componentes.</td></tr>';}
+    function renderBasicRankTable(scope){
+      const p=scope.screening,x=scope.anchor;
+      document.getElementById('rankBody').innerHTML=`<tr><td><span class="rank">—</span></td><td><b>${safe(x.n)}</b><br><span class="small">Screening básico</span></td><td>${p.within1.map(y=>safe(y.chain)).filter((v,i,a)=>a.indexOf(v)===i).join(' + ')}</td><td>${p.within3.length} ${p.within3.length===1?'sucursal':'sucursales'} ancla a ≤3 km · Reebok a ${p.reebokKm.toFixed(1)} km</td><td><span class="score">${p.score}</span><span class="small">/100</span><br><span class="small">${p.factors.map(f=>f.v).join(' + ')}</span></td><td><span class="decision ${p.decision.cls}">${p.decision.label}</span></td><td>Elegible por ${safe(x.chain)}; completar demanda, renta y ventas antes de decidir.</td></tr>`;
+    }
     renderCompTable(COMP_DATA);
     renderRankTable(RANK_DATA);
 
@@ -392,7 +430,7 @@
       banner.innerHTML=currentScope?`<span>Vista filtrada: ${safe(currentScope.label)}</span><small>KPIs, porcentajes, competencia, ranking, mapa y directorio usan esta plaza.</small>`:'<span>Vista nacional</span><small>Universo completo: 238 registros de sucursales ancla.</small>';
       const base=scopeRows();updateKpis(base);renderBars(base);renderStores();
       const rank=currentScope?.rank?[currentScope.rank]:[];
-      renderRankTable(currentScope?rank:RANK_DATA);
+      if(currentScope?.screening)renderBasicRankTable(currentScope);else renderRankTable(currentScope?rank:RANK_DATA);
       renderCompTable(currentScope?(currentScope.rank?COMP_DATA.filter(x=>norm(x.p).includes(norm(currentScope.rank.p.split('·')[0]))||norm(currentScope.rank.p).includes(norm(x.p.split('·')[0]))):[]):COMP_DATA);
       applyMapScope();
     }
